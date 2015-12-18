@@ -1,5 +1,6 @@
-cpus=$(cat /proc/cpuinfo | grep processor | wc -l); 
-load=$(uptime | grep -ohe 'load average[s:][: ].*' | awk '{ print $5 }'); 
+#!/bin/bash
+cpus=$(grep -c processor /proc/cpuinfo); 
+load=$(cut -d ' ' -f  3 /proc/loadavg); 
 half=$(echo - | awk "{print $cpus / 2}") ; 
 critical=$(echo - | awk "{print $cpus + $half }"); 
 echo " "; 
